@@ -221,7 +221,7 @@ process sam2bam {
         set val(name), path('*.sorted.bam') into mpa_aln_damageprofiler, mpa_aln_pydamage
     script:
         """
-        samtools view -F 4 $sam | cut -f 3 | sort | uniq > mapped_refs.txt
+        samtools view -F 4 $sam | cut -f 3 | sort -T | uniq > mapped_refs.txt
         samtools view -H $sam > all_refs.txt
         grep -Ff mapped_refs.txt all_refs.txt > mapped.sam
         samtools view -F 4 $sam >> mapped.sam
